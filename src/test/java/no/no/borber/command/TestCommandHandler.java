@@ -66,7 +66,18 @@ public class TestCommandHandler {
         } catch (MonsterKanIkkeFjernesException e) {
 
         }
+    }
 
+    @Test
+    public void skalKunneLeggeTilToOgFjerneEn() throws Exception {
+        KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven = new KundeLeggerMonsterIHandlekurven(griff);
+        KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven = new KundeFjernerMonsterFraHandlekurven(griff);
+        EventStore eventStore = new EventStore();
+        CommandHandler commandHandler = new CommandHandler(eventStore);
+        commandHandler.handle(kundeLeggerMonsterIHandlekurven);
+        commandHandler.handle(kundeLeggerMonsterIHandlekurven);
+        commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
 
+        Assert.assertEquals(3,eventStore.size());
     }
 }
