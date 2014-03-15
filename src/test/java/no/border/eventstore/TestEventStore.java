@@ -31,13 +31,5 @@ public class TestEventStore {
         verify(subscriber).eventAdded(event);
     }
 
-    @Test
-    public void handlekurvHarMottatMonster() throws Exception {
-        Handlekurv handlekurv = new Handlekurv();
-        MonsterLagtTilIHandlekurven nyMonsterInstanse = new MonsterLagtTilIHandlekurven(kraken);
-        handlekurv.eventAdded(nyMonsterInstanse);
-        Assert.assertEquals(1, handlekurv.size());
-        List<MonsterTypeJson> monsterTypeJsons = handlekurv.hentInnhold();
-        Assert.assertEquals("Kraken",monsterTypeJsons.get(0).getName());
-    }
+
 }
