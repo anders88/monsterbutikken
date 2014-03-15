@@ -19,6 +19,9 @@ public class EventStore {
         return events.size();
     }
 
+    public void subscribe(EventSubscriber subscriber) {
+
+    }
 
 
 }
