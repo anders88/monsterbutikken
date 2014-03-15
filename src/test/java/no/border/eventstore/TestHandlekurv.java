@@ -7,6 +7,7 @@ import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Map;
 
 public class TestHandlekurv {
 
@@ -18,8 +19,8 @@ public class TestHandlekurv {
         KundenLaTilMonsterIHandlekurven nyMonsterInstanse = new KundenLaTilMonsterIHandlekurven(kraken);
         handlekurv.eventAdded(nyMonsterInstanse);
         Assert.assertEquals(1, handlekurv.size());
-        List<BasketItem> basketItems = handlekurv.hentInnhold();
-        Assert.assertEquals("Kraken", basketItems.get(0).getMonsterType());
+        Map<String,BasketItem> basketItems = handlekurv.hentInnhold();
+        Assert.assertTrue(basketItems.containsKey("Kraken"));
     }
 
     @Test

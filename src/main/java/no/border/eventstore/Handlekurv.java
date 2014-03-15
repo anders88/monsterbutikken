@@ -4,11 +4,13 @@ import no.borber.monsterShop.basket.BasketItem;
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Handlekurv implements EventSubscriber {
 
-    List<BasketItem> handlekurvItems = new ArrayList<>();
+    Map<String,BasketItem> handlekurvItems = new HashMap<>();
 
     private int MONSTER_PRIS = 0;
 
@@ -17,32 +19,22 @@ public class Handlekurv implements EventSubscriber {
 
         if (event instanceof KundenLaTilMonsterIHandlekurven) {
             KundenLaTilMonsterIHandlekurven monster = (KundenLaTilMonsterIHandlekurven)event;
-            boolean monsterFinnes = false;
-            for (BasketItem item:handlekurvItems){
-                if (item.getMonsterType().equals(monster.getMonster().getName())){
-                    item.addMonster();
-                    monsterFinnes = true;
-                }
-            }
-            if (!monsterFinnes) {
-                handlekurvItems.add(new BasketItem(monster.getMonster().getName(),MONSTER_PRIS));
+            String monsterNavn = monster.getMonster().getName();
+            if (handlekurvItems.containsKey(monsterNavn)) {
+                handlekurvItems.get(monsterNavn).addMonster();
+            } else {
+                handlekurvItems.put(monsterNavn,new BasketItem(monsterNavn,MONSTER_PRIS));
             }
         }
 
         if (event instanceof KundenFjernetMonsterFraHandlekurven){
             KundenFjernetMonsterFraHandlekurven monster = (KundenFjernetMonsterFraHandlekurven) event;
-            BasketItem basketItem = null;
-            for (BasketItem item:handlekurvItems){
-                if (item.getMonsterType().equals(monster.getMonster().getName())){
-                    if (item.getNumber() > 1) {
-                        item.removeMonster();
-                    } else {
-                        basketItem = item;
-                    }
-                }
-            }
-            if (basketItem != null) {
-                handlekurvItems.remove(basketItem);
+            String monsterNavn = monster.getMonster().getName();
+            BasketItem item = handlekurvItems.get(monsterNavn);
+            if (item.getNumber() > 1) {
+                item.removeMonster();
+            } else{
+                handlekurvItems.remove(monsterNavn);
             }
         }
     }
@@ -51,7 +43,7 @@ public class Handlekurv implements EventSubscriber {
         return handlekurvItems.size();
     }
 
-    public List<BasketItem> hentInnhold() {
+    public Map<String,BasketItem> hentInnhold() {
         return handlekurvItems;
     }
 }
