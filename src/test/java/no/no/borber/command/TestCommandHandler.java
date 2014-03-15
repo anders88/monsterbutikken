@@ -7,6 +7,7 @@ import no.border.eventstore.EventStore;
 import no.border.eventstore.KundenLaTilMonsterIHandlekurven;
 import org.junit.Test;
 import org.mockito.Mockito;
+import sun.jvm.hotspot.utilities.AssertionFailure;
 
 public class TestCommandHandler {
 
@@ -23,10 +24,29 @@ public class TestCommandHandler {
 
     @Test
     public void testAtDetBlirOpprettetEtFjerneMonsterEventAvEnFjerneMonsterKommando() throws Exception {
+        KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven = new KundeLeggerMonsterIHandlekurven(griff);
+        KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven = new KundeFjernerMonsterFraHandlekurven(griff);
+
+        EventStore eventStore = new EventStore();
+        CommandHandler commandHandler = new CommandHandler(eventStore);
+
+        commandHandler.handle(kundeLeggerMonsterIHandlekurven);
+        commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
+
+        Assert.assertEquals(2, eventStore.size());
+    }
+
+    @Test
+    public void detSkalIkkeVaereLovAaFjerneEtMonsterSomIkkeLiggerIKurven() throws Exception {
         KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven = new KundeFjernerMonsterFraHandlekurven(griff);
         EventStore eventStore = new EventStore();
         CommandHandler commandHandler = new CommandHandler(eventStore);
-        commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
-        Assert.assertEquals(1, eventStore.size());
+        try {
+            commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
+            Assert.fail("Expected exception");
+        } catch (RuntimeException e) {
+            Assert.assertEquals("Monster is not in basket",e.getMessage());
+        }
+        Assert.assertEquals(0, eventStore.size());
     }
 }

@@ -1,6 +1,7 @@
 package no.no.borber.command;
 
 import no.border.eventstore.EventStore;
+import no.border.eventstore.KundenFjernetMonsterFraHandlekurven;
 import no.border.eventstore.KundenLaTilMonsterIHandlekurven;
 
 public class CommandHandler {
@@ -18,5 +19,7 @@ public class CommandHandler {
     }
 
     public void handle(KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven) {
+        KundenFjernetMonsterFraHandlekurven kundenFjernetMonsterFraHandlekurven = new KundenFjernetMonsterFraHandlekurven(kundeFjernerMonsterFraHandlekurven.getMonster());
+        eventStore.addEvent(kundenFjernetMonsterFraHandlekurven);
     }
 }
