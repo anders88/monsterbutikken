@@ -5,11 +5,11 @@ package no.border.eventstore;
  */
 public abstract class Event {
     private final int agregatId;
-    private final AgregatEnum agregatEnum;
+    private final AggregatEnum aggregatEnum;
 
 
-    protected Event(int agregatId, AgregatEnum agregatEnum) {
+    protected Event(int agregatId, AggregatEnum aggregatEnum) {
         this.agregatId = agregatId;
-        this.agregatEnum = agregatEnum;
+        this.aggregatEnum = aggregatEnum;
     }
 }

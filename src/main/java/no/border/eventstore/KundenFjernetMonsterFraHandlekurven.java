@@ -7,7 +7,7 @@ public class KundenFjernetMonsterFraHandlekurven extends Event {
     private final MonsterTypeJson monsterTypeJson;
 
     public KundenFjernetMonsterFraHandlekurven(MonsterTypeJson monsterTypeJson) {
-        super(1, AgregatEnum.Handlekurv);
+        super(1, AggregatEnum.Handlekurv);
         this.monsterTypeJson = monsterTypeJson;
     }
 

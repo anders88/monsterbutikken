@@ -1,6 +1,6 @@
 package no.border.eventstore;
 
 
-public enum AgregatEnum {
+public enum AggregatEnum {
     Handlekurv
 }

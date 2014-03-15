@@ -6,7 +6,7 @@ public class KundenLaTilMonsterIHandlekurven extends Event {
     private final MonsterTypeJson monster;
 
     public KundenLaTilMonsterIHandlekurven(MonsterTypeJson monster) {
-        super(1, AgregatEnum.Handlekurv);
+        super(1, AggregatEnum.Handlekurv);
         this.monster = monster;
     }
 

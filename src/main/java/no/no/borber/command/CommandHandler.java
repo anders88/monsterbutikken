@@ -1,16 +1,20 @@
 package no.no.borber.command;
 
+import no.borber.aggregate.HandlekurvAggregat;
 import no.border.eventstore.EventStore;
+import no.border.eventstore.Handlekurv;
 import no.border.eventstore.KundenFjernetMonsterFraHandlekurven;
 import no.border.eventstore.KundenLaTilMonsterIHandlekurven;
 
 public class CommandHandler {
 
     private EventStore eventStore;
+    private HandlekurvAggregat aggregat;
 
-    public CommandHandler(EventStore eventStore) {
+    public CommandHandler(EventStore eventStore, HandlekurvAggregat handlekurvAggregat) {
 
         this.eventStore = eventStore;
+        this.aggregat = handlekurvAggregat;
     }
 
     public void handle(KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven) {
@@ -19,7 +23,10 @@ public class CommandHandler {
     }
 
     public void handle(KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven) {
-        KundenFjernetMonsterFraHandlekurven kundenFjernetMonsterFraHandlekurven = new KundenFjernetMonsterFraHandlekurven(kundeFjernerMonsterFraHandlekurven.getMonster());
-        eventStore.addEvent(kundenFjernetMonsterFraHandlekurven);
+        if (aggregat.kanMonsterFjernes(kundeFjernerMonsterFraHandlekurven.getMonster())) {
+            KundenFjernetMonsterFraHandlekurven kundenFjernetMonsterFraHandlekurven = new KundenFjernetMonsterFraHandlekurven(kundeFjernerMonsterFraHandlekurven.getMonster());
+            eventStore.addEvent(kundenFjernetMonsterFraHandlekurven);
+        } else
+            throw new MonsterKanIkkeFjernesException();
     }
 }
