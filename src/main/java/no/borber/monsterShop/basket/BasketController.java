@@ -1,6 +1,13 @@
 package no.borber.monsterShop.basket;
 
 import no.borber.monsterShop.MonsterShopController;
+import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
+import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
+import no.border.eventstore.KundenFjernetMonsterFraHandlekurven;
+import no.border.eventstore.ServiceFactory;
+import no.no.borber.command.CommandHandler;
+import no.no.borber.command.KundeFjernerMonsterFraHandlekurven;
+import no.no.borber.command.KundeLeggerMonsterIHandlekurven;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +26,7 @@ public class BasketController extends MonsterShopController{
     @RequestMapping(value = "/basket/",  method=RequestMethod.GET)
     @ResponseBody()
     public Map<String, BasketItem> getBasket(){
+
         return null;
     }
 
@@ -31,7 +39,10 @@ public class BasketController extends MonsterShopController{
     @RequestMapping(value = "/basket/{monstertype}",  method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void add(@PathVariable String monstertype){
-
+        CommandHandler commandHandler = ServiceFactory.commandHandler();
+        MonsterTypeJson monsterType = MonsterTypesRepo.getMonsterType(monstertype);
+        KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven = new KundeLeggerMonsterIHandlekurven(monsterType);
+        commandHandler.handle(kundeLeggerMonsterIHandlekurven);
     }
 
     /**
@@ -43,7 +54,10 @@ public class BasketController extends MonsterShopController{
     @RequestMapping(value = "/basket/{monstertype}",  method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public void remove(@PathVariable String monstertype){
-
+        CommandHandler commandHandler = ServiceFactory.commandHandler();
+        MonsterTypeJson monsterType = MonsterTypesRepo.getMonsterType(monstertype);
+        KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven = new KundeFjernerMonsterFraHandlekurven(monsterType);
+        commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
     }
 
     /**
@@ -52,7 +66,7 @@ public class BasketController extends MonsterShopController{
     @RequestMapping(value = "/basket/sum",  method=RequestMethod.GET)
     @ResponseBody
     public BasketSum sum(){
-        return null;
+        return new BasketSum(42d);
     }
 
 }
