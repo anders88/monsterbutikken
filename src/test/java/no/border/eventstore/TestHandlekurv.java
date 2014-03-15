@@ -1,6 +1,7 @@
 package no.border.eventstore;
 
 import junit.framework.Assert;
+import no.borber.monsterShop.basket.BasketItem;
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
 import org.junit.Test;
@@ -17,8 +18,8 @@ public class TestHandlekurv {
         KundenLaTilMonsterIHandlekurven nyMonsterInstanse = new KundenLaTilMonsterIHandlekurven(kraken);
         handlekurv.eventAdded(nyMonsterInstanse);
         Assert.assertEquals(1, handlekurv.size());
-        List<MonsterTypeJson> monsterTypeJsons = handlekurv.hentInnhold();
-        Assert.assertEquals("Kraken",monsterTypeJsons.get(0).getName());
+        List<BasketItem> basketItems = handlekurv.hentInnhold();
+        Assert.assertEquals("Kraken", basketItems.get(0).getMonsterType());
     }
 
     @Test

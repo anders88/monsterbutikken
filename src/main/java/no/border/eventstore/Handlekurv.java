@@ -1,5 +1,6 @@
 package no.border.eventstore;
 
+import no.borber.monsterShop.basket.BasketItem;
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 
 import java.util.ArrayList;
@@ -7,25 +8,50 @@ import java.util.List;
 
 public class Handlekurv implements EventSubscriber {
 
-    List<MonsterTypeJson> listeMedMonstere = new ArrayList<>();
+    List<BasketItem> handlekurvItems = new ArrayList<>();
+
+    private int MONSTER_PRIS = 0;
 
     @Override
     public void eventAdded(Event event) {
+
         if (event instanceof KundenLaTilMonsterIHandlekurven) {
             KundenLaTilMonsterIHandlekurven monster = (KundenLaTilMonsterIHandlekurven)event;
-            listeMedMonstere.add(monster.getMonster());
+            boolean monsterFinnes = false;
+            for (BasketItem item:handlekurvItems){
+                if (item.getMonsterType().equals(monster.getMonster().getName())){
+                    item.addMonster();
+                    monsterFinnes = true;
+                }
+            }
+            if (!monsterFinnes) {
+                handlekurvItems.add(new BasketItem(monster.getMonster().getName(),MONSTER_PRIS));
+            }
+        }
 
-        } else if (event instanceof KundenFjernetMonsterFraHandlekurven){
+        if (event instanceof KundenFjernetMonsterFraHandlekurven){
             KundenFjernetMonsterFraHandlekurven monster = (KundenFjernetMonsterFraHandlekurven) event;
-            listeMedMonstere.remove(monster.getMonster());
+            BasketItem basketItem = null;
+            for (BasketItem item:handlekurvItems){
+                if (item.getMonsterType().equals(monster.getMonster().getName())){
+                    if (item.getNumber() > 1) {
+                        item.removeMonster();
+                    } else {
+                        basketItem = item;
+                    }
+                }
+            }
+            if (basketItem != null) {
+                handlekurvItems.remove(basketItem);
+            }
         }
     }
 
     public int size() {
-        return listeMedMonstere.size();
+        return handlekurvItems.size();
     }
 
-    public List<MonsterTypeJson> hentInnhold() {
-        return listeMedMonstere;
+    public List<BasketItem> hentInnhold() {
+        return handlekurvItems;
     }
 }

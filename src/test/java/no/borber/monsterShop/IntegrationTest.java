@@ -22,7 +22,7 @@ public class IntegrationTest {
         KundeLeggerMonsterIHandlekurven monsterTilKurv = new KundeLeggerMonsterIHandlekurven(vampyr);
         commandHandler.handle(monsterTilKurv);
 
-        Assert.assertTrue(handlekurv.hentInnhold().contains(vampyr));
+        Assert.assertEquals(1,handlekurv.hentInnhold().size());
 
     }
 }
