@@ -12,7 +12,7 @@ import static org.mockito.Mockito.verify;
 
 public class TestEventStore {
 
-    private MonsterTypeJson kraken = MonsterTypesRepo.getMonsterType("kraken");
+    private MonsterTypeJson kraken = MonsterTypesRepo.getMonsterType("Kraken");
 
     @Test
     public void skalKunneLeggeTilEnOrdreIEventStore() {

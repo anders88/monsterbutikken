@@ -13,4 +13,18 @@ public class MonsterLagtTilIHandlekurven extends Event {
     public MonsterTypeJson getMonster() {
         return monster;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof MonsterLagtTilIHandlekurven)) {
+            return false;
+        }
+        MonsterLagtTilIHandlekurven other = (MonsterLagtTilIHandlekurven) obj;
+        return monster.equals(other.monster);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
 }
