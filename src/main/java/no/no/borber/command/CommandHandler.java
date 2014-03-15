@@ -11,10 +11,10 @@ public class CommandHandler {
     private EventStore eventStore;
     private HandlekurvAggregat aggregat;
 
-    public CommandHandler(EventStore eventStore, HandlekurvAggregat handlekurvAggregat) {
-
+    public CommandHandler(EventStore eventStore) {
         this.eventStore = eventStore;
-        this.aggregat = handlekurvAggregat;
+        this.aggregat = new HandlekurvAggregat();
+        this.eventStore.subscribe(this.aggregat);
     }
 
     public void handle(KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven) {

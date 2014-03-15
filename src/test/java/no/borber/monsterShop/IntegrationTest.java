@@ -14,9 +14,7 @@ public class IntegrationTest {
     @Test
     public void skalFungereFraCommandoTilProjeksjon() throws Exception {
         EventStore eventStore = new EventStore();
-        HandlekurvAggregat handlekurvAggregat = new HandlekurvAggregat();
-        eventStore.subscribe(handlekurvAggregat);
-        CommandHandler commandHandler = new CommandHandler(eventStore,handlekurvAggregat);
+        CommandHandler commandHandler = new CommandHandler(eventStore);
         Handlekurv handlekurv = new Handlekurv();
         eventStore.subscribe(handlekurv);
 

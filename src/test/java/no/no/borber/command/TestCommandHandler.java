@@ -18,9 +18,7 @@ public class TestCommandHandler {
     public void testAtEnKommandoLagerEtEvent() throws Exception {
         KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven = new KundeLeggerMonsterIHandlekurven(griff);
         final EventStore eventStore = Mockito.mock(EventStore.class);
-        HandlekurvAggregat handlekurvAggregat = new HandlekurvAggregat();
-        eventStore.subscribe(handlekurvAggregat);
-        CommandHandler commandHandler = new CommandHandler(eventStore,handlekurvAggregat);
+        CommandHandler commandHandler = new CommandHandler(eventStore);
         commandHandler.handle(kundeLeggerMonsterIHandlekurven);
         Mockito.verify(eventStore).addEvent(new KundenLaTilMonsterIHandlekurven(griff));
     }
@@ -30,9 +28,7 @@ public class TestCommandHandler {
         KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven = new KundeLeggerMonsterIHandlekurven(griff);
         KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven = new KundeFjernerMonsterFraHandlekurven(griff);
         EventStore eventStore = new EventStore();
-        HandlekurvAggregat handlekurvAggregat = new HandlekurvAggregat();
-        eventStore.subscribe(handlekurvAggregat);
-        CommandHandler commandHandler = new CommandHandler(eventStore,handlekurvAggregat);
+        CommandHandler commandHandler = new CommandHandler(eventStore);
 
         commandHandler.handle(kundeLeggerMonsterIHandlekurven);
         commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
@@ -44,9 +40,7 @@ public class TestCommandHandler {
     public void detSkalIkkeVaereLovAaFjerneEtMonsterSomIkkeLiggerIKurven() throws Exception {
         KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven = new KundeFjernerMonsterFraHandlekurven(griff);
         EventStore eventStore = new EventStore();
-        HandlekurvAggregat handlekurvAggregat = new HandlekurvAggregat();
-        eventStore.subscribe(handlekurvAggregat);
-        CommandHandler commandHandler = new CommandHandler(eventStore,handlekurvAggregat);
+        CommandHandler commandHandler = new CommandHandler(eventStore);
         try {
             commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
             Assert.fail("Expected exception");
@@ -61,9 +55,7 @@ public class TestCommandHandler {
         KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven = new KundeLeggerMonsterIHandlekurven(griff);
         KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven = new KundeFjernerMonsterFraHandlekurven(griff);
         EventStore eventStore = new EventStore();
-        HandlekurvAggregat handlekurvAggregat = new HandlekurvAggregat();
-        eventStore.subscribe(handlekurvAggregat);
-        CommandHandler commandHandler = new CommandHandler(eventStore,handlekurvAggregat);
+        CommandHandler commandHandler = new CommandHandler(eventStore);
 
         commandHandler.handle(kundeLeggerMonsterIHandlekurven);
         commandHandler.handle(kundeFjernerMonsterFraHandlekurven);
