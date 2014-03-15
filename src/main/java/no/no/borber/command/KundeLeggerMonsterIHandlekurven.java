@@ -2,10 +2,10 @@ package no.no.borber.command;
 
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 
-public class LeggerTilMonsterIHandlekurv {
+public class KundeLeggerMonsterIHandlekurven {
     private MonsterTypeJson monsterTypeJson;
 
-    public LeggerTilMonsterIHandlekurv(MonsterTypeJson monsterTypeJson) {
+    public KundeLeggerMonsterIHandlekurven(MonsterTypeJson monsterTypeJson) {
 
         this.monsterTypeJson = monsterTypeJson;
     }

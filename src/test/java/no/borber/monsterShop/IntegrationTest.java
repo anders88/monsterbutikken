@@ -5,7 +5,7 @@ import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
 import no.border.eventstore.EventStore;
 import no.border.eventstore.Handlekurv;
 import no.no.borber.command.CommandHandler;
-import no.no.borber.command.LeggerTilMonsterIHandlekurv;
+import no.no.borber.command.KundeLeggerMonsterIHandlekurven;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class IntegrationTest {
         eventStore.subscribe(handlekurv);
 
         MonsterTypeJson vampyr = MonsterTypesRepo.getMonsterType("Vampyr");
-        LeggerTilMonsterIHandlekurv monsterTilKurv = new LeggerTilMonsterIHandlekurv(vampyr);
+        KundeLeggerMonsterIHandlekurven monsterTilKurv = new KundeLeggerMonsterIHandlekurven(vampyr);
         commandHandler.handle(monsterTilKurv);
 
         Assert.assertTrue(handlekurv.hentInnhold().contains(vampyr));

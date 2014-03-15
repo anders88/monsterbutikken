@@ -25,8 +25,6 @@ public class TestHandlekurv {
     public void monsterKanFjernesFraHandlekurven() throws Exception {
         handlekurv.eventAdded(new KundenLaTilMonsterIHandlekurven(kraken));
         handlekurv.eventAdded(new KundenFjernetMonsterFraHandlekurven(kraken));
-
         Assert.assertEquals(0,handlekurv.size());
-
     }
 }

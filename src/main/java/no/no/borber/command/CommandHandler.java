@@ -12,8 +12,11 @@ public class CommandHandler {
         this.eventStore = eventStore;
     }
 
-    public void handle(LeggerTilMonsterIHandlekurv leggerTilMonsterIHandlekurv) {
-        KundenLaTilMonsterIHandlekurven event = new KundenLaTilMonsterIHandlekurven(leggerTilMonsterIHandlekurv.getMonsterTypeJson());
+    public void handle(KundeLeggerMonsterIHandlekurven kundeLeggerMonsterIHandlekurven) {
+        KundenLaTilMonsterIHandlekurven event = new KundenLaTilMonsterIHandlekurven(kundeLeggerMonsterIHandlekurven.getMonsterTypeJson());
         eventStore.addEvent(event);
+    }
+
+    public void handle(KundeFjernerMonsterFraHandlekurven kundeFjernerMonsterFraHandlekurven) {
     }
 }
