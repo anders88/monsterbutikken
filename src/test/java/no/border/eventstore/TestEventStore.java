@@ -5,8 +5,6 @@ import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -17,7 +15,7 @@ public class TestEventStore {
     @Test
     public void skalKunneLeggeTilEnOrdreIEventStore() {
         EventStore es = new EventStore();
-        es.addEvent(new MonsterLagtTilIHandlekurven(kraken));
+        es.addEvent(new KundenLaTilMonsterIHandlekurven(kraken));
         Assert.assertEquals(1,es.size());
     }
 
@@ -26,7 +24,7 @@ public class TestEventStore {
         EventStore es = new EventStore();
         EventSubscriber subscriber = mock(EventSubscriber.class);
         es.subscribe(subscriber);
-        MonsterLagtTilIHandlekurven event = new MonsterLagtTilIHandlekurven(kraken);
+        KundenLaTilMonsterIHandlekurven event = new KundenLaTilMonsterIHandlekurven(kraken);
         es.addEvent(event);
         verify(subscriber).eventAdded(event);
     }

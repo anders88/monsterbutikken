@@ -2,10 +2,10 @@ package no.border.eventstore;
 
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 
-public class MonsterLagtTilIHandlekurven extends Event {
+public class KundenLaTilMonsterIHandlekurven extends Event {
     private final MonsterTypeJson monster;
 
-    public MonsterLagtTilIHandlekurven(MonsterTypeJson monster) {
+    public KundenLaTilMonsterIHandlekurven(MonsterTypeJson monster) {
         super(1, AgregatEnum.Handlekurv);
         this.monster = monster;
     }
@@ -16,10 +16,10 @@ public class MonsterLagtTilIHandlekurven extends Event {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof MonsterLagtTilIHandlekurven)) {
+        if (!(obj instanceof KundenLaTilMonsterIHandlekurven)) {
             return false;
         }
-        MonsterLagtTilIHandlekurven other = (MonsterLagtTilIHandlekurven) obj;
+        KundenLaTilMonsterIHandlekurven other = (KundenLaTilMonsterIHandlekurven) obj;
         return monster.equals(other.monster);
     }
 

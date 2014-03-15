@@ -1,7 +1,7 @@
 package no.no.borber.command;
 
 import no.border.eventstore.EventStore;
-import no.border.eventstore.MonsterLagtTilIHandlekurven;
+import no.border.eventstore.KundenLaTilMonsterIHandlekurven;
 
 public class CommandHandler {
 
@@ -13,7 +13,7 @@ public class CommandHandler {
     }
 
     public void handle(LeggerTilMonsterIHandlekurv leggerTilMonsterIHandlekurv) {
-        MonsterLagtTilIHandlekurven event = new MonsterLagtTilIHandlekurven(leggerTilMonsterIHandlekurv.getMonsterTypeJson());
+        KundenLaTilMonsterIHandlekurven event = new KundenLaTilMonsterIHandlekurven(leggerTilMonsterIHandlekurv.getMonsterTypeJson());
         eventStore.addEvent(event);
     }
 }

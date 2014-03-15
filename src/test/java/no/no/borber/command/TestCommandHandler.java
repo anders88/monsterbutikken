@@ -3,7 +3,7 @@ package no.no.borber.command;
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
 import no.border.eventstore.EventStore;
-import no.border.eventstore.MonsterLagtTilIHandlekurven;
+import no.border.eventstore.KundenLaTilMonsterIHandlekurven;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -17,7 +17,7 @@ public class TestCommandHandler {
         final EventStore eventStore = Mockito.mock(EventStore.class);
         CommandHandler commandHandler = new CommandHandler(eventStore);
         commandHandler.handle(leggerTilMonsterIHandlekurv);
-        Mockito.verify(eventStore).addEvent(new MonsterLagtTilIHandlekurven(griff));
+        Mockito.verify(eventStore).addEvent(new KundenLaTilMonsterIHandlekurven(griff));
 
     }
 }

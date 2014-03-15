@@ -14,8 +14,8 @@ public class Handlekurv implements EventSubscriber {
     @Override
     public void eventAdded(Event event) {
         numberOfMonstersInBasket++;
-        if (event instanceof MonsterLagtTilIHandlekurven) {
-            MonsterLagtTilIHandlekurven monster = (MonsterLagtTilIHandlekurven)event;
+        if (event instanceof KundenLaTilMonsterIHandlekurven) {
+            KundenLaTilMonsterIHandlekurven monster = (KundenLaTilMonsterIHandlekurven)event;
             listeMedMonstere.add(monster.getMonster());
         }
     }
