@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TestHandlekurv {
 
-    private MonsterTypeJson kraken = MonsterTypesRepo.getMonsterType("kraken");
+    private MonsterTypeJson kraken = MonsterTypesRepo.getMonsterType("Kraken");
 
     @Test
     public void handlekurvHarMottatMonster() throws Exception {
