@@ -2,6 +2,7 @@ package no.border.eventstore;
 
 import no.borber.monsterShop.basket.BasketItem;
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
+import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class Handlekurv implements EventSubscriber {
             if (handlekurvItems.containsKey(monsterNavn)) {
                 handlekurvItems.get(monsterNavn).addMonster();
             } else {
-                handlekurvItems.put(monsterNavn,new BasketItem(monsterNavn,MONSTER_PRIS));
+                handlekurvItems.put(monsterNavn,new BasketItem(monsterNavn, MonsterTypesRepo.getMonsterType(monsterNavn).getPrice()));
             }
         }
 
@@ -45,5 +46,9 @@ public class Handlekurv implements EventSubscriber {
 
     public Map<String,BasketItem> hentInnhold() {
         return handlekurvItems;
+    }
+
+    public double getSum() {
+        return 0;
     }
 }

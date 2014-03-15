@@ -29,4 +29,12 @@ public class TestHandlekurv {
         handlekurv.eventAdded(new KundenFjernetMonsterFraHandlekurven(kraken));
         Assert.assertEquals(0,handlekurv.size());
     }
+
+    @Test
+    public void testAtSummenAvMonstereErKorrekt() throws Exception {
+        handlekurv.eventAdded(new KundenLaTilMonsterIHandlekurven(kraken));
+        handlekurv.eventAdded(new KundenLaTilMonsterIHandlekurven(kraken));
+
+        Assert.assertEquals(MonsterTypesRepo.getMonsterType(kraken.getName()).getPrice() * 2, handlekurv.getSum());
+    }
 }
