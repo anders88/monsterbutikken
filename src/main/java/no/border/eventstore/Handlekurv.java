@@ -4,6 +4,7 @@ import no.borber.monsterShop.basket.BasketItem;
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,6 +50,11 @@ public class Handlekurv implements EventSubscriber {
     }
 
     public double getSum() {
-        return 0;
+        double sum=0d;
+        for (BasketItem item : handlekurvItems.values()) {
+            double rowPrice = item.getPrice() * item.getNumber();
+            sum = sum + rowPrice;
+        }
+        return sum;
     }
 }

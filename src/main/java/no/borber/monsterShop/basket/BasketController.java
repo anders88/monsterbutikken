@@ -67,7 +67,8 @@ public class BasketController extends MonsterShopController{
     @RequestMapping(value = "/basket/sum",  method=RequestMethod.GET)
     @ResponseBody
     public BasketSum sum(){
-        return new BasketSum(42d);
+        Handlekurv handlekurv = ServiceFactory.handlekurv();
+        return new BasketSum(handlekurv.getSum());
     }
 
 }
