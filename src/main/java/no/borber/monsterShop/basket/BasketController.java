@@ -3,6 +3,7 @@ package no.borber.monsterShop.basket;
 import no.borber.monsterShop.MonsterShopController;
 import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
 import no.borber.monsterShop.monsterTypes.MonsterTypesRepo;
+import no.border.eventstore.Handlekurv;
 import no.border.eventstore.KundenFjernetMonsterFraHandlekurven;
 import no.border.eventstore.ServiceFactory;
 import no.no.borber.command.CommandHandler;
@@ -26,8 +27,8 @@ public class BasketController extends MonsterShopController{
     @RequestMapping(value = "/basket/",  method=RequestMethod.GET)
     @ResponseBody()
     public Map<String, BasketItem> getBasket(){
-
-        return null;
+        Handlekurv handlekurv = ServiceFactory.handlekurv();
+        return handlekurv.hentInnhold();
     }
 
     /**
