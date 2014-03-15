@@ -1,5 +1,9 @@
 package no.border.eventstore;
 
+import no.borber.monsterShop.monsterTypes.MonsterTypeJson;
+
+import java.util.List;
+
 public class Handlekurv implements EventSubscriber {
 
     int numberOfMonstersInBasket = 0;
@@ -11,5 +15,9 @@ public class Handlekurv implements EventSubscriber {
 
     public int size() {
         return numberOfMonstersInBasket;
+    }
+
+    public List<MonsterTypeJson> hentInnhold() {
+        return null;
     }
 }
