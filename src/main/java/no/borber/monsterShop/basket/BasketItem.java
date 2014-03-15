@@ -3,7 +3,7 @@ package no.borber.monsterShop.basket;
 public class BasketItem {
     private String name;
     private double price;
-    private int number;
+    private int number=1;
 
     public BasketItem(String name, double price) {
         this.name = name;
